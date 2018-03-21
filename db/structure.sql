@@ -83,7 +83,9 @@ CREATE TABLE posts (
     id integer NOT NULL,
     title character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    url character varying,
+    name character varying
 );
 
 
@@ -250,4 +252,8 @@ INSERT INTO schema_migrations (version) VALUES ('20180319062756');
 INSERT INTO schema_migrations (version) VALUES ('20180319074832');
 
 INSERT INTO schema_migrations (version) VALUES ('20180319123825');
+
+INSERT INTO schema_migrations (version) VALUES ('20180321085339');
+
+INSERT INTO schema_migrations (version) VALUES ('20180321085746');
 

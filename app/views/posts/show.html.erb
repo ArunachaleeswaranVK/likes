@@ -1,9 +1,10 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<h2><%= @post.title %></h2>
+
+<div>
+		<%= link_to @post.name, @post.url %>
+		<%= image_tag @post.url,  :size => '260x180' %>
+</div>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>

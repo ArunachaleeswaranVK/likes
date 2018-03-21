@@ -1,21 +1,7 @@
-<%= form_for(@post) do |f| %>
-  <% if @post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<h1>Upload a file</h1>
 
-      <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= form_tag posts_path, enctype: 'multipart/form-data' do %>
+  <%= text_field_tag :title %>
+	<%= file_field_tag :file  %>
+	<%= submit_tag 'Upload file' %>
 <% end %>

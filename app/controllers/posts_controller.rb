@@ -23,17 +23,31 @@ class PostsController < ApplicationController
 
   # POST /posts
   # POST /posts.json
-  def create
-    @post = Post.new(post_params)
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+  
+  def create
+   
+    obj = S3_BUCKET.objects[params[:file].original_filename]
+    
+    # Upload the file
+    obj.write(
+      file: params[:file],
+      acl: :public_read
+    )
+    
+    # Create an object for the upload
+    @post = Post.new(
+			url: obj.public_url,
+			name: obj.key,
+			title: params[:title]
+		)
+    
+    # Save the upload
+    if @post.save
+      redirect_to posts_path, success: 'File successfully uploaded'
+    else
+      flash.now[:notice] = 'There was an error'
+      render :new
     end
   end
 
@@ -81,6 +95,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title)
+      params.require(:post).permit(:title,:url,:name)
     end
 end

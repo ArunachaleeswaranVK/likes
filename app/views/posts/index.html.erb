@@ -1,40 +1,39 @@
 <p id="notice"><%= notice %></p>
-<div>
-  <% if user_signed_in? %>
-  <li>
-  <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
-  </li>
-<% else %>
-  <li>
-  <%= link_to('Login', new_user_session_path)  %>  
-  </li>
-<% end %>
-</div>
-<h1>Listing Posts</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="container">
 
-  <tbody>
+<h1 class="center">Listing Posts</h1>
+
+<br></br>
+
+  
+    
     <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
+    <div class="center">
+    <div class="row">
+    <div class="col-md-12">
+      
+        <div class="panel panel-default">
+          <div class="panel-body">
+           
+           <h4><strong><%= link_to post.title , post %></strong></h4>
         
-        <td><%= pluralize(post.likes.count, "vote") %></td>
-        <td><%= button_to '+1', likes_post_path(post), method: :post %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+            <p><%= pluralize(post.likes.count, "vote") %></p>
+            <p><%= button_to 'Like', likes_post_path(post), method: :post %></p>
+            <p><%= link_to 'Show', post %> |
+            <%= link_to 'Edit', edit_post_path(post) %> |
+            <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+           
+          </div>
+        </div>
+        
+      
+    </div>  
+    </div>
+    </div>
     <% end %>
-  </tbody>
-</table>
+  
 
-<br>
 
-<%= link_to 'New Post', new_post_path %>
+
+</div>
