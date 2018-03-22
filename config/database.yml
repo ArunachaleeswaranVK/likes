@@ -19,6 +19,9 @@ test:
 
 production:
   <<: *default
-  database: your_app_name_production
-  username: your_app_name
-  password: <%= ENV['YOUR_APP_NAME_DATABASE_PASSWORD'] %>
+  database: postgres
+  username: postgres
+  password: postgres
+  host: postgres.cmu3svzeqqqv.ap-south-1.rds.amazonaws.com
+  port: 5432
+  
